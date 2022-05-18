@@ -1,0 +1,16 @@
+#N
+config_en
+config_out
+addr\[3\]
+addr\[2\]
+addr\[1\]
+addr\[0\]
+
+#S
+config_clk
+config_in
+
+#E
+out
+
+#W
