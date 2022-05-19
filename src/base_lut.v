@@ -30,7 +30,7 @@ module BaseLUT #(
     `endif
     output [FRAME_WIDTH-1:0] config_out,
 
-    input wire reset,
+    input wire reset
 );
 
 // This is memory storage. Without specification, the synthesis tool can infer
