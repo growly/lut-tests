@@ -1,9 +1,12 @@
+
+# Design
 # This is the config used to openlane for synthesis only
 set ::env(DESIGN_NAME) "LUT"
 
 #set ::env(SYNTH_DEFINES) "FRACTURABLE PREDECODE_2"
-set ::env(SYNTH_DEFINES) ""
-set ::env(SYNTH_PARAMETERS) "INPUTS=5"
+#set ::env(SYNTH_DEFINES) ""
+#set ::env(SYNTH_DEFINES) "FRACTURABLE"
+#set ::env(SYNTH_PARAMETERS) "INPUTS=6"
 
 set ::env(VERILOG_FILES) [glob $::env(DESIGN_DIR)/src/*.v]
 set ::env(CLOCK_TREE_SYNTH) 0

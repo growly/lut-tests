@@ -1,2 +1,4 @@
 runs/
 lut_test
+config_*.tcl
+base_config.tcl
