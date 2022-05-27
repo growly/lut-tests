@@ -19,8 +19,7 @@ localparam LOWER_BITS = WIDTH/4;
 
 wire [INPUTS-3:0] s_lower = s[INPUTS-3:0];
 
-// TODO(growly): Couldn't get this to work.
-//wire [3:0] values_intermediate = {
+// TODO(growly): Couldn't get this to work.  //wire [3:0] values_intermediate = {
 //    values[4*LOWER_BITS-1:3*LOWER_BITS][s_lower],
 //    values[3*LOWER_BITS-1:2*LOWER_BITS][s_lower],
 //    values[2*LOWER_BITS-1:1*LOWER_BITS][s_lower],
@@ -41,23 +40,25 @@ wire p1 = s[INPUTS-1];
 wire p0 = s[INPUTS-2];
 
 // TODO(growly): How to make sure this doesn't just become a mux?
-//always @(*) begin
-//  if (~p1 & ~p0) begin
-//    z = select_00;
-//  end else if (~p1 & p0) begin
-//    z = select_01;
-//  end else if (p1 & ~p0) begin
-//    z = select_10;
-//  end else begin
-//    z = select_11;
-//  end
-//end
+reg z_int;
+always @(*) begin
+  if (~p1 & ~p0) begin
+    z_int = select_00;
+  end else if (~p1 & p0) begin
+    z_int = select_01;
+  end else if (p1 & ~p0) begin
+    z_int = select_10;
+  end else begin
+    z_int = select_11;
+  end
+end
+assign z = z_int;
 
-assign z
-  = ~p1 & ~p0 ? select_00
-  : ~p1 & p0 ? select_01
-  : p1 & ~p0 ? select_10
-  : p1 & p0 ? select_11 : 1'bz;
+//assign z
+//  = ~p1 & ~p0 ? select_00
+//  : ~p1 & p0 ? select_01
+//  : p1 & ~p0 ? select_10
+//  : p1 & p0 ? select_11 : 1'bz;
            
 
 `else
