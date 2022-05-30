@@ -35,24 +35,33 @@ wire select_01 = values_01[s_lower];
 wire [LOWER_BITS-1:0] values_00 = values[1*LOWER_BITS-1:0*LOWER_BITS];
 wire select_00 = values_00[s_lower];
 
-// Extract the two most-significant selection bits. These are pre-decoded:
-wire p1 = s[INPUTS-1];
-wire p0 = s[INPUTS-2];
-
-// TODO(growly): How to make sure this doesn't just become a mux?
+// TODO(growly): How to make sure this is a balanced tree?
 reg z_int;
 always @(*) begin
-  if (~p1 & ~p0) begin
-    z_int = select_00;
-  end else if (~p1 & p0) begin
-    z_int = select_01;
-  end else if (p1 & ~p0) begin
-    z_int = select_10;
-  end else begin
-    z_int = select_11;
-  end
+  case (s[INPUTS-1:INPUTS-2])
+    2'b00: z_int = select_00;
+    2'b01: z_int = select_01;
+    2'b10: z_int = select_10;
+    2'b11: z_int = select_11;
+  endcase
 end
 assign z = z_int;
+
+// Extract the two most-significant selection bits. These are pre-decoded:
+//wire p1 = s[INPUTS-1];
+//wire p0 = s[INPUTS-2];
+
+//always @(*) begin
+//  if (~p1 & ~p0) begin
+//    z_int = select_00;
+//  end else if (~p1 & p0) begin
+//    z_int = select_01;
+//  end else if (p1 & ~p0) begin
+//    z_int = select_10;
+//  end else begin
+//    z_int = select_11;
+//  end
+//end
 
 //assign z
 //  = ~p1 & ~p0 ? select_00
